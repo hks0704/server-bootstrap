@@ -7,14 +7,9 @@ set -euo pipefail
 ########################################
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../common/log.sh"
+source "$SCRIPT_DIR/../common/check.sh"
 
-########################################
-# 안전장치
-########################################
-if [[ $EUID -ne 0 ]]; then
-    log_error "This script must be run as root."
-    exit 1
-fi
+check_root()
 
 echo
 
