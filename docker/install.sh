@@ -11,7 +11,7 @@ source "$SCRIPT_DIR/../common/check.sh"
 
 TARGET_USER="${SUDO_USER:-$USER}"
 
-check_root()
+check_root
 
 if command -v docker >/dev/null 2>&1; then
     log_info "Docker is already installed."
