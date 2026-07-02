@@ -14,24 +14,24 @@ TARGET_USER="${SUDO_USER:-$USER}"
 # 안전장치
 ########################################
 if [[ $EUID -ne 0 ]]; then
-    echo "[ERROR] Please run this script as root."
+    log_error "Please run this script as root."
     exit 1
 fi
 
 if command -v docker >/dev/null 2>&1; then
-    echo "[INFO] Docker is already installed."
+    log_info "Docker is already installed."
     exit 0
 fi
 
-echo "[1/6] Updating package index..."
+log_step "[1/6] Updating package index..."
 apt-get update
 
-echo "[2/6] Installing dependencies..."
+log_step "[2/6] Installing dependencies..."
 apt-get install -y \
     ca-certificates \
     curl
 
-echo "[3/6] Adding Docker repository..."
+log_step "[3/6] Adding Docker repository..."
 
 install -m 0755 -d /etc/apt/keyrings
 
@@ -47,7 +47,7 @@ $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
 
 apt-get update
 
-echo "[4/6] Installing Docker..."
+log_step "[4/6] Installing Docker..."
 
 apt-get install -y \
     docker-ce \
@@ -56,12 +56,12 @@ apt-get install -y \
     docker-buildx-plugin \
     docker-compose-plugin
 
-echo "[5/6] Starting Docker service..."
+log_step "[5/6] Starting Docker service..."
 
 systemctl enable docker
 systemctl start docker
 
-echo "[6/6] Verifying installation..."
+log_step "[6/6] Verifying installation..."
 
 docker run hello-world
 
