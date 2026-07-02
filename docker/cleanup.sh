@@ -9,7 +9,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../common/log.sh"
 source "$SCRIPT_DIR/../common/check.sh"
 
-check_root()
+check_root
 
 echo
 log_step "Docker Cleanup Utility"
