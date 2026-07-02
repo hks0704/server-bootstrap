@@ -7,16 +7,11 @@ set -euo pipefail
 ########################################
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../common/log.sh"
+source "$SCRIPT_DIR/../common/check.sh"
 
 TARGET_USER="${SUDO_USER:-$USER}"
 
-########################################
-# 안전장치
-########################################
-if [[ $EUID -ne 0 ]]; then
-    log_error "Please run this script as root."
-    exit 1
-fi
+check_root()
 
 if command -v docker >/dev/null 2>&1; then
     log_info "Docker is already installed."
