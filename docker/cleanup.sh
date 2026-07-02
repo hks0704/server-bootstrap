@@ -3,7 +3,7 @@
 set -euo pipefail
 
 ########################################
-# common utils 로드
+# common 로드
 ########################################
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../common/log.sh"
@@ -18,14 +18,8 @@ log_step "Docker Cleanup Utility"
 log_warn "This will remove ALL Docker containers, images, volumes, and networks."
 log_warn "This action is NOT reversible."
 
-# read -p "Type 'yes' to continue: " CONFIRM
-
-# if [[ "$CONFIRM" != "yes" ]]; then
-#     log_info "Cleanup cancelled."
-#     exit 0
-# fi
-
-if ! confirm "Install Docker?"; then
+if ! confirm "Cleanup Docker?"; then
+    log_info "Cleanup cancelled."
     exit 0
 fi
 

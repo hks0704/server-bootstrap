@@ -3,11 +3,12 @@
 set -euo pipefail
 
 ########################################
-# check.sh, log.sh 로드
+# common 로드
 ########################################
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../common/log.sh"
 source "$SCRIPT_DIR/../common/check.sh"
+source "$SCRIPT_DIR/../common/utils.sh"
 
 check_root
 
@@ -17,6 +18,11 @@ log_step "Docker Uninstall"
 
 log_warn "This will remove ALL Docker Systems."
 log_warn "This action is NOT reversible."
+
+if ! confirm "Uninstall Docker?"; then
+    log_info "Uninstall cancelled."
+    exit 0
+fi
 
 # 1. Docker 서비스 중지
 log_step "[1/6] Docker 서비스 중지"

@@ -8,6 +8,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../common/log.sh"
 source "$SCRIPT_DIR/../common/check.sh"
+source "$SCRIPT_DIR/../common/utils.sh"
 
 TARGET_USER="${SUDO_USER:-$USER}"
 
@@ -66,11 +67,11 @@ docker image rm hello-world >/dev/null 2>&1 || true
 usermod -aG docker "$TARGET_USER"
 
 echo
-echo "========================================="
+print_separator
 log_success "Docker installation completed successfully."
 docker --version
 docker compose version
 echo
 log_info "User '$TARGET_USER' has been added to the docker group."
 echo "Please log out and log back in to use Docker without sudo."
-echo "========================================="
+print_separator
