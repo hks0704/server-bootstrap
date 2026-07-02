@@ -64,4 +64,10 @@ Ubuntu 24.04 LTS
 
 ## 부록
 
-- 필요시 `mysql/mysql.env` 내용을 채워서 mysql 설치시 사용할 것
+- 필요시 `mysql/mysql.env` 내용을 채워서 mysql 설치시 사용할 것(예시 mysql.env 템플릿), 또는 `mysql.env` 제거 후 터미널 창에서 직접 입력
+
+```text
+ROOT_PASSWORD=1234
+NEW_USERNAME=admin
+NEW_PASSWORD=1234
+```
