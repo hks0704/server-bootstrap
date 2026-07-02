@@ -4,8 +4,11 @@
 # ex: 계속 진행하시겠습니까? (y/N)
 confirm() {
     local message="${1:-Continue?}"
-    read -rp "$message [y/N]: " answer
-    [[ "$answer" =~ ^[Yy]$ ]]
+    local confirm
+    read -rp "$message [y/N]: " confirm
+    # 소문자로 통일
+    confirm="${confirm,,}"
+    [[ "$confirm" == "y" || "$confirm" == "yes" ]]
 }
 
 # 2. command 존재 여부
