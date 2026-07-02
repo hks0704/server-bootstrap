@@ -3,7 +3,7 @@
 set -euo pipefail
 
 ########################################
-# log.sh 로드
+# check.sh, log.sh 로드
 ########################################
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../common/log.sh"
