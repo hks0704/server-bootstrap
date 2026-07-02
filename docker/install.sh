@@ -72,10 +72,10 @@ usermod -aG docker "$TARGET_USER"
 
 echo
 echo "========================================="
-echo "Docker installation completed successfully."
+log_success "Docker installation completed successfully."
 docker --version
 docker compose version
 echo
-echo "User '$TARGET_USER' has been added to the docker group."
+log_info "User '$TARGET_USER' has been added to the docker group."
 echo "Please log out and log back in to use Docker without sudo."
 echo "========================================="
