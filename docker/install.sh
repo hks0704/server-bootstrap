@@ -2,8 +2,17 @@
 
 set -euo pipefail
 
+########################################
+# log.sh 로드
+########################################
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../common/log.sh"
+
 TARGET_USER="${SUDO_USER:-$USER}"
 
+########################################
+# 안전장치
+########################################
 if [[ $EUID -ne 0 ]]; then
     echo "[ERROR] Please run this script as root."
     exit 1
