@@ -13,7 +13,7 @@ source "$SCRIPT_DIR/../common/check.sh"
 source "$SCRIPT_DIR/../common/utils.sh"
 
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-DOCKERFILE_DIR="${PROJECT_ROOT}/jenkins/Dockerfile"
+DOCKERFILE_DIR="${PROJECT_ROOT}/jenkins"
 
 check_root
 
@@ -52,6 +52,7 @@ log_step "Docker 이미지 빌드..."
 sudo docker build \
     -t "$IMAGE_NAME" \
     # "$PROJECT_ROOT" \
+    -f "$DOCKERFILE_DIR/Dockerfile" \
     "$DOCKERFILE_DIR" \
     --build-arg USER_UID=$USER_UID \
     --build-arg DOCKER_GID=$DOCKER_GID
