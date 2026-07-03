@@ -15,7 +15,24 @@ source "$SCRIPT_DIR/../common/utils.sh"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 DOCKERFILE_DIR="${PROJECT_ROOT}/jenkins"
 
+JENKINS_PORT=8081
+
 check_root
+
+##################################################
+# Firewall
+##################################################
+
+log_info "Firewall Check"
+
+if sudo ufw status | grep -qw inactive; then
+    log_warn "UFW is inactive."
+    sudo ufw enable
+fi
+
+log_info "Jenkins 포트 개방"
+sudo ufw allow ${JENKINS_PORT}
+sudo ufw reload
 
 IMAGE_NAME="server/jenkins"
 CONTAINER_NAME="server-jenkins"
@@ -48,10 +65,8 @@ if [ -z "$DOCKER_GID" ]; then
 fi
 
 log_step "Docker 이미지 빌드..."
-# sudo docker build -t $IMAGE_NAME . \
 sudo docker build \
     -t "$IMAGE_NAME" \
-    # "$PROJECT_ROOT" \
     -f "$DOCKERFILE_DIR/Dockerfile" \
     "$DOCKERFILE_DIR" \
     --build-arg USER_UID=$USER_UID \
@@ -78,12 +93,11 @@ if sudo docker ps --format '{{.Names}}' | grep -qx "$CONTAINER_NAME"; then
     log_info "Container Details"
     sudo docker inspect \
         --format='
-    Name      : {{.Name}}
-    Image     : {{.Config.Image}}
-    Status    : {{.State.Status}}
-    Started   : {{.State.StartedAt}}
-    IPAddress : {{.NetworkSettings.IPAddress}}
-    ' "$CONTAINER_NAME"
+    Name   : {{.Name}}
+    Image  : {{.Config.Image}}
+    Status : {{.State.Status}}
+    Started: {{.State.StartedAt}}
+        ' "$CONTAINER_NAME"
     echo
 
     log_info "Container Logs:"
