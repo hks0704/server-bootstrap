@@ -17,3 +17,6 @@ services:
     volumes:
       - "${VOLUME_NAME:-localstack-data}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
+
+volumes:
+  localstack-data:
