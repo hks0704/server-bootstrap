@@ -1,0 +1,19 @@
+services:
+  localstack:
+    container_name: ${CONTAINER_NAME:-server-localstack}
+    image: ${IMAGE_NAME:-localstack/localstack:4.8.1}
+    restart: unless-stopped
+
+    ports:
+      - "${HOST_PORT:-4566}:${CONTAINER_PORT:-4566}" # LocalStack Gateway 포트
+
+    environment:
+      SERVICES: ${SERVICES:-s3,sqs,sns,dynamodb,lambda,iam,sts} # 필요한 AWS 서비스 지정 (선택 사항)
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION:-ap-northeast-2}
+      DEBUG: "0"
+      PERSISTENCE: "1"
+      DOCKER_HOST: unix:///var/run/docker.sock
+
+    volumes:
+      - "${VOLUME_NAME:-localstack-data}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"

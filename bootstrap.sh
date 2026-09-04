@@ -11,3 +11,4 @@ set -e
 ./redis/install.sh
 ./nginx/install.sh
 ./jenkins/install.sh
+# ./localstack/install.sh # Local/VM Mocking 환경에서만 활성화
