@@ -13,6 +13,8 @@ services:
       DEBUG: "0"
       PERSISTENCE: "1"
       DOCKER_HOST: unix:///var/run/docker.sock
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
 
     volumes:
       - "${VOLUME_NAME:-localstack-data}:/var/lib/localstack"
