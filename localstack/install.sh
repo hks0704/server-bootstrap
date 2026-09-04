@@ -16,15 +16,17 @@ source "$SCRIPT_DIR/../common/utils.sh"
 
 check_root
 
+DOCKER_COMPOSE_DIR="$SCRIPT_DIR/../localstack"
+
 ########################################
 # Docker Compose
 ########################################
-cd "$SCRIPT_DIR" || {
-    log_error "Failed to change directory to $SCRIPT_DIR"
+cd "$DOCKER_COMPOSE_DIR" || {
+    log_error "Failed to change directory to $DOCKER_COMPOSE_DIR"
     exit 1
 }
 
-COMPOSE_FILE="$SCRIPT_DIR/docker-compose.yml"
+COMPOSE_FILE="$DOCKER_COMPOSE_DIR/docker-compose.yml"
 
 if [ ! -f "$COMPOSE_FILE" ]; then
     log_error "docker-compose.yml not found: $COMPOSE_FILE"
