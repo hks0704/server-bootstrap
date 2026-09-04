@@ -2,6 +2,8 @@
 
 set -e
 
+./gcc/install.sh # option
+./vim/install.sh # option
 ./docker/install.sh
 ./git/install.sh
 # ./java/install.sh # 도커 컨테이너에서 설치

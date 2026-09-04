@@ -11,6 +11,9 @@
 
 ## Installed Software
 
+- 기본 Utils
+  - gcc (option)
+  - vim (option)
 - Docker
 - Docker Compose
 - Jenkins
