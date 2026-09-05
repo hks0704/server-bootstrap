@@ -30,11 +30,11 @@
 
 ## Usage
 
+```bash
 git clone ...
-
 chmod +x
-
 ./bootstrap.sh
+```
 
 ## Individual Installation
 
@@ -50,6 +50,7 @@ Ubuntu 24.04 LTS
 
 ## Future Plans
 
+- MiniStack
 - Kubernetes
 - Terraform
 - Ansible
